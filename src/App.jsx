@@ -1,7 +1,7 @@
-import Header from './components/Header.jsx'
-import VendorCard from './components/VendorCard.jsx'
-import MenuItemCard from './components/MenuItemCard.jsx'
-import Footer from './components/Footer.jsx'
+import Header from './Components/Header.jsx'
+import VendorCard from './Components/VendorCard.jsx'
+import MenuItemCard from './Components/MenuItemCard.jsx'
+import Footer from './Components/Footer.jsx'
 function App() {
  return (
  <>
