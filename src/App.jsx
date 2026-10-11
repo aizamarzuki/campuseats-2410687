@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import vendors from './data/vendors.js'
+import vendors from './data/vendor.js'
 import Header from './components/Header.jsx'
 import VendorCard from './components/VendorCard.jsx'
 import MenuList from './components/MenuList.jsx'
