@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import Header from './components/Header.jsx'
 import VendorCard from './components/VendorCard.jsx'
-import MenuList from './Components/MenuList.jsx'
+import MenuList from './components/MenuList.jsx'
 import Footer from './components/Footer.jsx'
-import { Loading, ErrorMessage } from './Components/Status.jsx'
+import { Loading, ErrorMessage } from './components/Status.jsx'
 function App() {
 const [selectedVendorId, setSelectedVendorId] = useState(vendors[0].id)
 const selectedVendor = vendors.find((v) => v.id === selectedVendorId)
