@@ -3,6 +3,7 @@ import Header from './components/Header.jsx'
 import VendorCard from './components/VendorCard.jsx'
 import MenuList from './components/MenuList.jsx'
 import Footer from './components/Footer.jsx'
+import vendors from '../public/api/vendors.json'
 import { Loading, ErrorMessage } from './components/Status.jsx'
 function App() {
 const [selectedVendorId, setSelectedVendorId] = useState(vendors[0].id)
