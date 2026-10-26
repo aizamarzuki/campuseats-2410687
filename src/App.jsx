@@ -31,3 +31,4 @@ return (
  <Footer />
  </>
 )
+export default App
