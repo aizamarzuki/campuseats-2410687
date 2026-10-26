@@ -4,8 +4,7 @@ const MAHALLAHS = ['Ali', 'Aminah', 'Faruq', 'Asiah', 'Bilal', 'Hafsa', 'Uthman'
 // A plain function: values in, errors object out. Empty object = valid.
 function validate(values) {
  const errors = {}
- if (values.name.trim().length < 3) errors.name = 'Enter your name (at least 3 
-characters).'
+ if (values.name.trim().length < 3) errors.name = 'Enter your name (at least 3 characters).'
  // TODO: mahallah must be chosen
  // TODO: pickupTime must be between '07:00' and '22:00' (strings compare fine)
  return errors
