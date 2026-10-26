@@ -10,4 +10,4 @@ export function ErrorMessage({ message, onRetry }) {
  </div>
  )
 }
-export default Status
+

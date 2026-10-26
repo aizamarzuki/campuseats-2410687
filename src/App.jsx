@@ -9,7 +9,6 @@ const [selectedVendorId, setSelectedVendorId] = useState(vendors[0].id)
 const selectedVendor = vendors.find((v) => v.id === selectedVendorId)
 const [cart, setCart] = useState([])
 const [view, setView] = useState('menu') // 'menu' | 'cart' | 'done'
-
 const [lastOrder, setLastOrder] = useState(null)
 function handlePlaceOrder(details) {
  const total = 0 // TODO: same reduce as CartPage
