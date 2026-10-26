@@ -1,0 +1,19 @@
+{
+ "id": "kafe-uthman",
+ "name": "Mahallah Cafe Uthman",
+ "location": "Mahallah Uthman Ground Floor",
+ "openHours": "8:00 am - 10:00 pm",
+ "isOpen": true,
+ "menu": [
+ { "id": "uth-1", "name": "Nasi Ayam Penyet", "price": 7.0, "description": "Smashed fried chicken with sambal and rice",
+  "category": "Rice", "popular": true },
+ { "id": "uth-2", "name": "Chicken Wrap", "price": 6.0, "description": "Fried chicken with fresh vegetables wrapped in a tortilla", 
+ "category": "Sandwiches", "available": true },
+ { "id": "uth-3", "name": "Iced Lemon Tea", "price": 2.5, "description": "Refreshing iced lemon tea",
+  "category": "Drinks", "available": true },
+ { "id": "uth-4", "name": "Nasi Dadar Beredar", "price": 4.0, "description": "Fried egg with rice and sambal hijau",
+  "category": "Rice", "available": true },
+ { "id": "uth-5", "name": "Teh Tarik", "price": 2.0, "description": "Traditional Malaysian pulled tea",
+  "category": "Drinks", "available": true }
+ ]
+}
