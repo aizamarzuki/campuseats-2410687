@@ -1,4 +1,4 @@
-import { useParams } from 'react'
+import { useParams } from 'react-router'
 import { useVendors } from '../hooks/useVendors.js'
 import { useCart } from '../hooks/useCart.js'
 import MenuList from '../components/MenuList.jsx'
