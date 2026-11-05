@@ -1,4 +1,5 @@
 import { createContext } from 'react'
 
 // Create Context object for global Cart management
-export const CartContext = createContext(null)
+const CartContext = createContext(null)
+export default CartContext
