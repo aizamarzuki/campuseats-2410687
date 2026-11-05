@@ -1,4 +1,4 @@
-import { CartContext } from './cart-context.js'
+import CartContext from './cart-context.js'
 import { useLocalStorage } from '../hooks/useLocalStorage.js'
 
 /**
