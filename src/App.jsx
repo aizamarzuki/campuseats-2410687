@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router'
-import { CartProvider } from './context/CartProvider.jsx'
+import CartProvider from './context/CartProvider.jsx'
 import Layout from './components/Layout.jsx'
 import HomePage from './pages/HomePage.jsx'
 import VendorPage from './pages/VendorPage.jsx'
@@ -11,7 +11,7 @@ import NotFoundPage from './pages/NotFoundPage.jsx'
  * App Component
  * Configures global Router provider, Cart Context Provider, and nested Route Table.
  */
-export default function App() {
+function App() {
   return (
     <BrowserRouter>
       <CartProvider>
@@ -30,3 +30,4 @@ export default function App() {
     </BrowserRouter>
   )
 }
+export default App

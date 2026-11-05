@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import { CartContext } from '../context/cart-context.js'
+import CartContext from '../context/cart-context.js'
 
 /**
  * Custom Hook: useCart

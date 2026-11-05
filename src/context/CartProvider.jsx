@@ -8,7 +8,7 @@ import { useLocalStorage } from '../hooks/useLocalStorage.js'
  * 
  * @param {ReactNode} children - Dynamic child components wrapped inside <CartProvider>
  */
-export function CartProvider({ children }) {
+function CartProvider({ children }) {
   // 1. Persistent State: Custom hooks load and persist state in browser localStorage
   const [cart, setCart] = useLocalStorage('campuseats-cart', [])
   const [orders, setOrders] = useLocalStorage('campuseats-orders', [])
@@ -108,3 +108,4 @@ export function CartProvider({ children }) {
     </CartContext.Provider>
   )
 }
+export default CartProvider
