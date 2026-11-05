@@ -1,5 +1,6 @@
 // One row in the cart. It shows data and reports clicks upward; it owns no state.
 function CartItem({ line, onChangeQty, onRemove }) {
+    // Destructure 'item' object and 'qty' number from the 'line' prop
     const { item, qty } = line
     return (
         <li className="cart-line">
