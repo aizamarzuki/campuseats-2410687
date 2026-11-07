@@ -33,8 +33,9 @@ Add a new section every week, before you tag. Did not use AI? Write "None" under
 - Tool(s): Gemini
 - What I Asked:
   1. How to migrate global state to `CartProvider` and write `useCart`, `useLocalStorage`, and `useVendors` custom hooks.
-  2. How to implement client-side routing using React Router 8 (`BrowserRouter`, `Routes`, `Route`, `Outlet`, `NavLink`, `useParams`, `useNavigate`).
+  2. How to implement client-side routing using React Router 8 (`BrowserRouter`, `Routes`, `Route`, `Outlet`, `NavLink`, `useParams` `useNavigate`).
   3. How to implement Week 4 step for Digit 7 personal feature (persisting item notes in order history).
+  4. How to add `try/catch` error boundaries around `JSON.parse` and `localStorage.setItem` inside the `useLocalStorage.js` custom hook.
 - What I kept, changed or rejected, and why:
   1. Created `CartProvider` supplying cart state, order history, and `updateNote` handler.
   2. Rendered saved item notes under each line item on `OrdersPage.jsx`.
