@@ -160,5 +160,94 @@
         "available": false
       }
     ]
+  },
+  {
+    "id": "2417219-pokpan",
+    "name": "Pokpan's Kitchen",
+    "location": "Mahallah Zubair, Block J,",
+    "openHours": "9:00 AM - 10:00 PM",
+    "isOpen": true,
+    "menu": [
+      {
+        "id": "2417219-1",
+        "name": "Nasi Kerabu Ayam Bakar",
+        "description": "Blue rice served with grilled chicken, fresh herbs, sambal and budu.",
+        "price": 10,
+        "category": "Rice",
+        "available": true
+      },
+      {
+        "id": "2417219-2",
+        "name": "Nasi Berlauk Gulai Ikan",
+        "description": "White rice served with Kelantan-style fish curry.",
+        "price": 7,
+        "category": "Rice",
+        "available": true
+      },
+      {
+        "id": "2417219-3",
+        "name": "Nasi Tumpang",
+        "description": "Traditional layered rice wrapped in banana leaves with assorted fillings.",
+        "price": 6,
+        "category": "Rice",
+        "available": true
+      },
+      {
+        "id": "2417219-4",
+        "name": "Laksam Kelantan",
+        "description": "Soft rice noodle rolls served with creamy fish gravy and fresh vegetables.",
+        "price": 7,
+        "category": "Noodles",
+        "available": true
+      },
+      {
+        "id": "2417219-5",
+        "name": "Laksa Kelantan",
+        "description": "Rice noodles served with rich coconut fish gravy and fresh herbs.",
+        "price": 7,
+        "category": "Noodles",
+        "available": true
+      },
+      {
+        "id": "2417219-6",
+        "name": "Solok Lada",
+        "description": "Green chillies stuffed with seasoned fish and grated coconut.",
+        "price": 4,
+        "category": "Snacks",
+        "available": true
+      },
+      {
+        "id": "2417219-7",
+        "name": "Pulut Panggang",
+        "description": "Grilled glutinous rice wrapped in banana leaves with spicy coconut filling.",
+        "price": 3,
+        "category": "Snacks",
+        "available": true
+      },
+      {
+        "id": "2417219-8",
+        "name": "Akok Kelantan",
+        "description": "Traditional sweet dessert made with eggs, coconut milk and palm sugar.",
+        "price": 3.5,
+        "category": "Desserts",
+        "available": true
+      },
+      {
+        "id": "2417219-9",
+        "name": "Jala Mas",
+        "description": "Traditional golden egg-thread dessert cooked in sugar syrup.",
+        "price": 4,
+        "category": "Desserts",
+        "available": true
+      },
+      {
+        "id": "2417219-10",
+        "name": "Nekbat",
+        "description": "Traditional Kelantanese sponge dessert served in sweet syrup.",
+        "price": 4,
+        "category": "Desserts",
+        "available": true
+      }
+    ]
   }
 ]

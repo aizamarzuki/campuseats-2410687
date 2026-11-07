@@ -29,3 +29,14 @@ Add a new section every week, before you tag. Did not use AI? Write "None" under
   - Kept updating cart items immutably (updating `qty` or filtering) instead of mutating state directly with `cart.push()`.
   - Kept deriving total prices on the fly using `.reduce()` instead of redundantly storing totals in state.
 - One thing the AI got wrong and how I fixed it: The AI spotted a single-letter casing bug where `if (Loading)` in `App.jsx` was checking the imported `<Loading />` component function reference (which always evaluates to truthy) instead of the `loading` boolean state variable (lowercase `l`). Changing `Loading` to `loading` allowed the `useEffect` completion state to render the main vendor view.
+## Week 4
+- Tool(s): Gemini
+- What I Asked:
+  1. How to migrate global state to `CartProvider` and write `useCart`, `useLocalStorage`, and `useVendors` custom hooks.
+  2. How to implement client-side routing using React Router 8 (`BrowserRouter`, `Routes`, `Route`, `Outlet`, `NavLink`, `useParams`, `useNavigate`).
+  3. How to implement Week 4 step for Digit 7 personal feature (persisting item notes in order history).
+- What I kept, changed or rejected, and why:
+  1. Created `CartProvider` supplying cart state, order history, and `updateNote` handler.
+  2. Rendered saved item notes under each line item on `OrdersPage.jsx`.
+- One thing the AI got wrong and how I fixed it:
+The AI generated code importing components from `react-router-dom`, which is obsolete in React Router 8 where all routing hooks and elements are imported directly from `react-router`. I updated all imports to `from 'react-router'`.
