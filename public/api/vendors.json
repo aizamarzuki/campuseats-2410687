@@ -1,7 +1,7 @@
 [
   {
     "id": "2410687-kafe-uthman",
-    "name": "Mahallah Cafe Uthman",
+    "name": "Mahallah Uthman Cafeteria",
     "location": "Mahallah Uthman Ground Floor",
     "openHours": "8:00 am - 10:00 pm",
     "isOpen": true,
@@ -18,7 +18,7 @@
         "id": "2410687-uth-2",
         "name": "Chicken Wrap",
         "price": 6,
-        "description": "Fried chicken with fresh vegetables wrapped in a tortilla",
+        "description": "Scissor-cut crispy chicken with fresh lettuces wrapped in a tortilla",
         "category": "Sandwiches",
         "available": true
       },
@@ -72,7 +72,7 @@
       },
       {
         "id": "2410687-uth-9",
-        "name": "Sharwarma",
+        "name": "Shawarma",
         "price": 6,
         "description": "Chickpea and meat wrap with garlic and spicy sauce",
         "category": "Sandwiches",
