@@ -15,6 +15,7 @@ export default function OrdersPage() {
           <div key={order.id} className="card" style={{ marginBottom: '1rem' }}>
             <h3>Order #{order.id}</h3>
             <p><strong>Name:</strong> {order.name}</p>
+            <p><strong>Date:</strong> {order.date}</p>
             <p><strong>Pickup Location:</strong> {order.mahallah}</p>
             <p><strong>Pickup Time:</strong> {order.pickupTime}</p>
             <p><strong>Total Paid:</strong> RM {order.total.toFixed(2)}</p>
