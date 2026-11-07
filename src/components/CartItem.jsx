@@ -1,7 +1,7 @@
 // One row in the cart. It shows data and reports clicks upward; it owns no state.
-function CartItem({ line, onChangeQty, onRemove }) {
-    // Destructure 'item' object and 'qty' number from the 'line' prop
-    const { item, qty } = line
+function CartItem({ line, onChangeQty, onRemove, onUpdateNote }) {
+    // Destructure 'item' object, 'qty' number, and 'note' string from the 'line' prop
+    const { item, qty, note = '' } = line
     return (
         <li className="cart-line">
             <div>
@@ -25,6 +25,20 @@ function CartItem({ line, onChangeQty, onRemove }) {
             >
                 Remove
             </button>
+            {/* Personal Feature (Digit 7): Controlled textarea for item notes */}
+            <div className="cart-note-box">
+                <label htmlFor={`note-${item.id}`} className="note-label">
+                    Special instructions / Note:
+                </label>
+                <textarea
+                id={`note-${item.id}`}
+                className="note-input"
+                value={note}
+                placeholder="e.g. Less ice, no sugar, extra sambal..."
+                rows="2"
+                onChange={(e) => onUpdateNote(item.id, e.target.value)}
+                />
+            </div>
         </li>
     )
 }

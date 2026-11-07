@@ -45,6 +45,38 @@
         "description": "Traditional Malaysian pulled tea",
         "category": "Drinks",
         "available": true
+      },
+      {
+        "id": "2410687-uth-6",
+        "name": "Ayam Gunting",
+        "price": 8,
+        "description": "Scissor-cut crispy chicken combined with the mouthwatering spices",
+        "category": "Snacks",
+        "available": true
+      },
+      {
+        "id": "2410687-uth-7",
+        "name": "Mixed Chicken with Roti",
+        "price": 5,
+        "description": "Chicken mixed with potatoes and vegetables served with roti",
+        "category": "Roti/Snacks",
+        "available": true
+      },
+      {
+        "id": "2410687-uth-8",
+        "name": "Malatang",
+        "price": 12,
+        "description": "Instant noodles with various vegetables and meat in a spicy broth",
+        "category": "Noodles",
+        "available": true
+      },
+      {
+        "id": "2410687-uth-9",
+        "name": "Sharwarma",
+        "price": 6,
+        "description": "Chickpea and meat wrap with garlic and spicy sauce",
+        "category": "Sandwiches",
+        "available": true
       }
     ]
   },

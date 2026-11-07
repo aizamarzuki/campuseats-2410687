@@ -37,7 +37,7 @@ function CartProvider({ children }) {
       }
       
       // If item is new, append it as a new line object with initial qty = 1
-      return [...prevCart, { item, qty: 1 }]
+      return [...prevCart, { item, qty: 1, note: '' }] // note initialized as empty string
     })
   }
 
@@ -65,6 +65,19 @@ function CartProvider({ children }) {
    */
   function removeFromCart(itemId) {
     setCart((prevCart) => prevCart.filter((line) => line.item.id !== itemId))
+  }
+
+  /**
+   * Personal Feature (Digit 7): Update note for a specific cart line
+   * @param {string|number} itemId 
+   * @param {string} note - Special request / preparation instruction
+   */
+  function updateNote(itemId, note) {
+    setCart((prevCart) =>
+      prevCart.map((line) =>
+        line.item.id === itemId ? { ...line, note } : line
+      )
+    )
   }
 
   /**
@@ -101,6 +114,7 @@ function CartProvider({ children }) {
         addToCart,
         changeQty,
         removeFromCart,
+        updateNote,
         placeOrder
       }}
     >

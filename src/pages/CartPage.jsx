@@ -4,7 +4,7 @@ import { useCart } from '../hooks/useCart.js'
 
 function CartPage() {
   // Consume cart state and handlers directly from Context
-  const { cart, changeQty, removeFromCart, total } = useCart()
+  const { cart, changeQty, removeFromCart, updateNote, total } = useCart()
 
   if (cart.length === 0) {
     return <p className="muted">Your cart is empty. Pick something from a menu first.</p>
@@ -21,6 +21,7 @@ function CartPage() {
               line={line}
               onChangeQty={changeQty}
               onRemove={removeFromCart}
+              onUpdateNote={updateNote}
             />
           ))}
         </ul>
