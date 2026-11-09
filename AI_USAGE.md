@@ -41,3 +41,17 @@ Add a new section every week, before you tag. Did not use AI? Write "None" under
   2. Rendered saved item notes under each line item on `OrdersPage.jsx`.
 - One thing the AI got wrong and how I fixed it:
 The AI generated code importing components from `react-router-dom`, which is obsolete in React Router 8 where all routing hooks and elements are imported directly from `react-router`. I updated all imports to `from 'react-router'`.
+
+## Week 5: Firebase Setup, AuthContext & Protected Routes
+
+- Tools: Gemini
+- What I Asked"
+  1. How to integrate Firebase Authentication (Email/Password & Google Sign-In) with Vite environment variables.
+  2. How to construct `<AuthProvider>` and `useAuth` hook with an `onAuthStateChanged` observer.
+  3. How to write `<ProtectedRoute>` to handle user loading states and redirect guests to `/login` with return parameters.
+  4. How to enforce Digit 7 Week 5 requirement (displaying "Log in to add notes" for guests).
+- What I Kept / Changed:
+  1. Kept the exact `authErrorMessage` utility function to map Firebase error codes to readable labels.
+  2. Rendered conditional login call-to-actions in `CartItem.jsx` based on active `user` context.
+- One Thing the AI Got Wrong:
+  - The AI omitted the `loading` check inside `ProtectedRoute.jsx`, causing a quick red screen flash of `/login` on page refresh before Firebase restored authentication state. I fixed it by returning `<Loading />` while `loading` is true.

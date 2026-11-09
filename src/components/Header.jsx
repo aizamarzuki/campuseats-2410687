@@ -1,15 +1,21 @@
-import { NavLink } from 'react-router'
+import { NavLink, useNavigate } from 'react-router'
 import { useCart } from '../hooks/useCart.js'
+import { useAuth } from '../hooks/useAuth.js'
 
-function Header() {
-  // Read live item count directly from Cart Context
+export default function Header() {
   const { count } = useCart()
+  const { user, logout } = useAuth()
+  const navigate = useNavigate()
+
+  async function handleLogout() {
+    await logout()
+    navigate('/')
+  }
 
   return (
     <header className="header">
       <h1 className="logo">CampusEats</h1>
       <nav className="nav">
-        {/* NavLink automatically injects active state styling based on current URL */}
         <NavLink to="/" end className={({ isActive }) => (isActive ? 'link active' : 'link')}>
           Vendors
         </NavLink>
@@ -19,8 +25,17 @@ function Header() {
         <NavLink to="/cart" className={({ isActive }) => (isActive ? 'link cart active' : 'link cart')}>
           Cart <span className="badge">{count}</span>
         </NavLink>
+        {user ? (
+          <>
+            <span className="user-name">Hi, {user.displayName || user.email}</span>
+            <button type="button" className="link" onClick={handleLogout}>Log out</button>
+          </>
+        ) : (
+          <NavLink to="/login" className={({ isActive }) => (isActive ? 'link active' : 'link')}>
+            Log in
+          </NavLink>
+        )}
       </nav>
     </header>
   )
 }
-export default Header
