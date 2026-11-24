@@ -20,3 +20,5 @@ If you are developing a production application, we recommend using TypeScript wi
 * **Vendor 1 (Primary Shop):** `Mahallah Uthman Cafeteria` (ID: `2410687-kafe-uthman`) — Primary shop created by me (Matric No. `2410687`). Features a full menu of 9 items across 4 categories.
 * **Vendor 2:** `Kafe Mahallah Zubair` (ID: `2419247-my-restaurant`) — Menu data credited from classmate `2419247`.
 * **Vendor 3:** `Pokpan's Kitchen` (ID: `2417219-pokpan`) — Menu data credited from classmate `2417219`.
+
+Firebase project ID: campuseats-2410687
