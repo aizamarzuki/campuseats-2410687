@@ -55,3 +55,18 @@ The AI generated code importing components from `react-router-dom`, which is obs
   2. Rendered conditional login call-to-actions in `CartItem.jsx` based on active `user` context.
 - One Thing the AI Got Wrong:
   - The AI omitted the `loading` check inside `ProtectedRoute.jsx`, causing a quick red screen flash of `/login` on page refresh before Firebase restored authentication state. I fixed it by returning `<Loading />` while `loading` is true.
+
+## Week 6: Cloud Firestore CRUD & Real-Time Listeners
+
+- Tools: Gemini
+- What I asked:
+  1. How to migrate vendor menus and orders from local storage and static JSON into Cloud Firestore collections and subcollections (`vendors/{vendorId}/menu`).
+  2. How to write a batch-seeding utility (`seedDemoData`) and real-time `onSnapshot` listeners inside `src/services/vendors.js` and `src/services/orders.js` with proper `useEffect` cleanup functions.
+  3. How to update `placeOrders` and `OrdersPage.jsx` to persist and display my Digit 7 personal feature (**Order Notes Per Item**) in Firestore.
+  4. How to troubleshoot missing `/seed` route 404 errors and empty vendor listings prior to seeding.
+- What I kept, changed or rejected, and why:
+  1. Kept the service-layer separation (`src/services/vendors.js` and `src/services/orders.js`) so React components stay clean and only consume hooks (`useVendors`, `useVendor`, `useMyOrders`).
+  2. Added an explicit `note` field inside the `items` array of `placeOrders` so custom item notes save directly to Firestore and render live on `/orders`.
+  3. Added the missing `/seed` route inside `App.jsx` under `import.meta.env.DEV` so demo data could be uploaded to Firestore without exposing the route in production.
+- One thing the AI got wrong and how I fixed it:**
+  When formatting `order.createdAt` on `OrdersPage.jsx`, the AI initially called `.toDate()` directly on `createdAt`. Because `serverTimestamp()` is temporarily `null` on the client right after `batch.commit()` before the server responds, it caused a null-reference crash; I fixed it with a ternary fallback (`order.createdAt ? order.createdAt.toDate().toLocaleString('en-MY') : 'just now'`).

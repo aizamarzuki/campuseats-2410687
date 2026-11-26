@@ -61,3 +61,16 @@ React Router uses colon syntax (`:id`) to define dynamic path parameters in rout
 
 4. How do layout routes and `<Outlet/>` simplify multi-page application structure?
 Layout routes wrap shared UI elements (like headers and footers) inside a master structure. The `<Outlet/>` component acts as a dynamic slot where matching child page components get rendered based on the current URL.
+
+## Week 6
+
+1. Order Placement Flow & Live Updates:
+   When I click "Place order" in `CheckoutForm.jsx`, `handleSubmit` validates the inputs and invokes `handlePlaceOrder` inside `CartPage.jsx`. `handlePlaceOrder` calls `placeOrders(user, cart, details)` in `src/services/orders.js`, which groups cart items by `vendorId` and uses `writeBatch` to save one document per vendor into the Firestore `orders` collection with `serverTimestamp()`. Once the batch commits, `clearCart()` empties the local cart and `navigate('/orders')` redirects to `OrdersPage.jsx`. On `OrdersPage`, the `useMyOrders` hook runs `subscribeToMyOrders`, which attaches a live `onSnapshot` listener to the user's orders. I never call `setOrders` manually because `onSnapshot` automatically pushes new documents or status updates from Firestore straight into component state.
+
+2. Firestore Data Shape & Denormalization:
+   `orders` is a top-level collection so that both students (querying by `studentUid`) and vendors (querying by `vendorId`) can fetch and filter orders easily without deep nested collection-group queries. Each order copies `vendorName`, item `name`, and `price` directly into the document so historical receipts stay accurate even if a vendor renames a dish or changes its price later.
+
+3. Personal Feature (Digit 7 — Order Notes Per Item):
+   Each item's custom note is stored inside the `items` array of each order document at `orders/{orderId}` under the `note` field (`items[].note`). In `OrdersPage.jsx`, the saved note is read and displayed using:
+   ```jsx
+   {item.note && item.note.trim() !== '' && <span className="muted"> — Note: <em>{item.note}</em></span>}

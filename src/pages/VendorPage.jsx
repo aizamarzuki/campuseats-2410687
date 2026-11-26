@@ -1,37 +1,25 @@
-import { useParams } from 'react-router'
-import { useVendors } from '../hooks/useVendors.js'
-import { useCart } from '../hooks/useCart.js'
+import { Link, useParams } from 'react-router'
+import { useVendor } from '../hooks/useVendor.js'
 import MenuList from '../components/MenuList.jsx'
 import { Loading, ErrorMessage } from '../components/Status.jsx'
 
-function VendorPage() {
-  // Extract dynamic segment ':id' from current URL (e.g., /vendor/kafe-uthman)
+export default function VendorPage() {
   const { id } = useParams()
-  const { vendors, loading, error, reload } = useVendors()
-  const { addToCart } = useCart()
+  const { vendor, menu, loading, error } = useVendor(id)
 
   if (loading) return <Loading />
-  if (error) return <ErrorMessage message={error} onRetry={reload} />
+  if (error) return <ErrorMessage message={error} onRetry={() => window.location.reload()} />
+  if (!vendor) return <p>Vendor not found. <Link to="/">Back to vendors</Link></p>
 
-  // Find vendor matching URL parameter ID
-  const vendor = vendors.find((v) => v.id === id)
-
-  // Handle unknown/invalid vendor IDs in URL
-  if (!vendor) {
-    return (
-      <div className="card error">
-        <h2>Vendor not found</h2>
-        <p>No vendor exists with ID: "{id}"</p>
-      </div>
-    )
-  }
+  // Attach vendorName so batch order splitting knows the vendor name
+  const items = menu.map((item) => ({ ...item, vendorName: vendor.name }))
 
   return (
     <section>
-      <h2 className="section-title">Menu: {vendor.name}</h2>
-      <p className="muted">{vendor.location} • Open: {vendor.openHours}</p>
-      <MenuList items={vendor.menu} onAdd={addToCart} />
+      <p><Link to="/">← All vendors</Link></p>
+      <h2 className="section-title">{vendor.name}</h2>
+      <p className="muted">{vendor.location} · {vendor.openHours}</p>
+      <MenuList items={items} />
     </section>
   )
 }
-export default VendorPage
