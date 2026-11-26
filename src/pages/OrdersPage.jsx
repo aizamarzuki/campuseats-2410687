@@ -1,8 +1,14 @@
-import { useCart } from '../hooks/useCart.js'
 import { Link } from 'react-router'
+import { useMyOrders } from '../hooks/useMyOrders.js'
+import { Loading, ErrorMessage } from '../components/Status.jsx'
+import OrderStatus from '../components/OrderStatus.jsx'
+import OrderActions from '../components/OrderActions.jsx'
 
 function OrdersPage() {
-  const { orders } = useCart()
+  const { orders, loading, error } = useMyOrders()
+
+  if (loading) return <Loading />
+  if (error) return <ErrorMessage message={error} onRetry={() => window.location.reload()} />
 
   if (orders.length === 0) {
     return (
@@ -15,51 +21,37 @@ function OrdersPage() {
   }
 
   return (
-    <div className="orders-page">
-      <h2>My Orders</h2>
-      <div className="orders-list">
+    <section>
+      <h2>My orders</h2>
+      <p className="muted">Status updates appear here live.</p>
+      <ul className="order-list">
         {orders.map((order) => (
-          <div key={order.id} className="card order-card">
-            <div className="order-header">
-              <div>
-                <h3>Order #{order.id}</h3>
-                <p className="muted">Placed on: {order.date}</p>
-              </div>
-              <span className="badge-status">Pickup at {order.pickupTime}</span>
-            </div>
-
-            <div className="order-details">
-              <p><strong>Customer:</strong> {order.name}</p>
-              <p><strong>Mahallah:</strong> {order.mahallah}</p>
-            </div>
-
-            <hr />
-
-            <ul className="order-items-list">
-              {order.items.map((line) => (
-                <li key={line.item.id} className="order-item-row">
-                  <div>
-                    <span>{line.qty}x {line.item.name}</span>
-                    {/* Personal Feature (Digit 7): Display saved note if present */}
-                    {line.note && line.note.trim() !== '' && (
-                      <p className="order-item-note">
-                        📝 <em>Note: {line.note}</em>
-                      </p>
-                    )}
-                  </div>
-                  <span>RM {(line.item.price * line.qty).toFixed(2)}</span>
+          <li key={order.id} className="card">
+            <p className="cart-name">{order.vendorName} · pickup {order.pickupTime}</p>
+            
+            {/* Render items and Digit 7 saved notes */}
+            <ul className="order-items-breakdown">
+              {order.items.map((item, idx) => (
+                <li key={item.itemId || idx}>
+                  <span>{item.qty}× {item.name}</span>
+                  {item.note && item.note.trim() !== '' && (
+                    <span className="muted"> — Note: <em>{item.note}</em></span>
+                  )}
                 </li>
               ))}
             </ul>
 
-            <div className="order-footer">
-              <strong>Total Paid: RM {order.total.toFixed(2)}</strong>
-            </div>
-          </div>
+            <p className="muted">
+              Placed {order.createdAt ? order.createdAt.toDate().toLocaleString('en-MY') : 'just now'}
+            </p>
+            <p className="price">RM {order.total.toFixed(2)}</p>
+            
+            <OrderStatus status={order.status} />
+            {order.status === 'Received' && <OrderActions order={order} />}
+          </li>
         ))}
-      </div>
-    </div>
+      </ul>
+    </section>
   )
 }
-
 export default OrdersPage
