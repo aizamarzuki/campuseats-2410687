@@ -74,3 +74,23 @@ Layout routes wrap shared UI elements (like headers and footers) inside a master
    Each item's custom note is stored inside the `items` array of each order document at `orders/{orderId}` under the `note` field (`items[].note`). In `OrdersPage.jsx`, the saved note is read and displayed using:
    ```jsx
    {item.note && item.note.trim() !== '' && <span className="muted"> — Note: <em>{item.note}</em></span>}
+
+## Week 7
+
+1. Order Security Rule Explained:
+
+allow update: if signedIn()
+&& resource.data.studentUid == request.auth.uid
+&& resource.data.status == 'Received'
+&& request.resource.data.diff(resource.data).affectedKeys().hasOnly(['pickupTime']);
+
+Line 1 checks that the user is logged in via Firebase Auth (`signedIn()`). Line 2 verifies that the logged-in user's UID matches the `studentUid` stored on the existing order document so students cannot edit each other's orders. Line 3 checks that the order's current status is still `Received`, locking changes once the vendor starts cooking. Line 4 uses `diff(...).affectedKeys().hasOnly(['pickupTime'])` to guarantee that only `pickupTime` is modified, blocking any attempts to alter `total`, `status`, or `items` (including item notes).
+
+2. Collection Access Control Summary:**
+- `users/{uid}`: Readable by the owning user or an admin; creatable only by that user with `role == 'student'`; updatable by an admin (who can change roles) or the user (provided `role` stays unchanged); deletable only by an admin.
+- `vendors/{vendorId}`: Readable by anyone if `approved == true`, or by the stall owner/admin if unapproved; creatable by a signed-in user with `approved == false` (or an admin); updatable by the stall owner (without changing `approved` or `ownerUid`) or an admin; deletable only by an admin.
+- `vendors/{vendorId}/menu/{itemId}`: Readable publicly by everyone (`allow read: if true`); writable (create, update, delete) only by the stall's `ownerUid` or an admin.
+- `orders/{orderId}`: Readable by the ordering student (`studentUid`), the stall owner (`vendorOwnerUid`), or an admin; creatable by a signed-in student with `status == 'Received'`; updatable by the vendor (status only) or the student (`pickupTime` only while `Received`); deletable only by the student while `Received`.
+
+3. Why UI Hiding Is Not Security:
+Hiding buttons or wrapping pages in `<RoleRoute>` only runs inside the user's browser, where anyone can open DevTools (F12) or call the Firestore SDK directly with `updateDoc()` to overwrite a menu item's price. Real security comes from `firestore.rules`, which Google's servers evaluate on every database request before allowing any read or write.

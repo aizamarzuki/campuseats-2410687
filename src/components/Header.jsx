@@ -2,10 +2,12 @@ import { NavLink, useNavigate } from 'react-router'
 import { useCart } from '../hooks/useCart.js'
 import { useAuth } from '../hooks/useAuth.js'
 
-export default function Header() {
+function Header() {
   const { count } = useCart()
-  const { user, logout } = useAuth()
   const navigate = useNavigate()
+  const { user, role, logout } = useAuth()
+
+
 
   async function handleLogout() {
     await logout()
@@ -35,7 +37,11 @@ export default function Header() {
             Log in
           </NavLink>
         )}
+        {role === 'vendor' && <NavLink to="/dashboard">Dashboard</NavLink>}
+        {role === 'admin' && <NavLink to="/admin">Admin</NavLink>}
+        {role === 'student' && <NavLink to="/become-vendor">Sell food</NavLink>}
       </nav>
     </header>
   )
 }
+export default Header

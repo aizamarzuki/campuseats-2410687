@@ -74,3 +74,17 @@ export function changePickupTime(orderId, pickupTime) {
 export function cancelOrder(orderId) {
   return deleteDoc(doc(db, 'orders', orderId))
 }
+
+export const STATUSES = ['Received', 'Preparing', 'Ready', 'Collected']
+
+// Inside placeOrders -> batch.set(ref, { ... }):
+// Add this field:
+// vendorOwnerUid: lines[0].item.vendorOwnerUid ?? null,
+
+export function subscribeToVendorOrders(ownerUid, onData, onError) {
+  const q = query(collection(db, 'orders'), where('vendorOwnerUid', '==', ownerUid))
+  return onSnapshot(q, (s) => onData(s.docs.map((d) => ({ id: d.id, ...d.data() }))), onError)
+}
+
+export const updateOrderStatus = (orderId, status) =>
+  updateDoc(doc(db, 'orders', orderId), { status })

@@ -11,6 +11,9 @@ import LoginPage from './pages/LoginPage.jsx'
 import RegisterPage from './pages/RegisterPage.jsx'
 import NotFoundPage from './pages/NotFoundPage.jsx'
 import SeedPage from './pages/SeedPage.jsx'
+import BecomeVendorPage from './pages/BecameVendorPage.jsx'
+import AdminPage from './pages/AdminPage.jsx'
+import RoleRoute from './components/RoleRoute.jsx'
 
 function App() {
   return (
@@ -29,7 +32,24 @@ function App() {
               <Route element={<ProtectedRoute />}>
                 <Route path="cart" element={<CartPage />} />
                 <Route path="orders" element={<OrdersPage />} />
+                <Route path="become-vendor" element={<BecomeVendorPage />} />
               </Route>
+
+              {/* Role-protected routes */}
+              <Route element={<RoleRoute roles={['vendor']} />}>
+                <Route path="dashboard" element={<VendorPage />} />
+              </Route>
+              <Route element={<RoleRoute roles={['student']} />}>
+                <Route path="become-vendor" element={<BecomeVendorPage />} />
+              </Route>
+              <Route element={<RoleRoute roles={['admin']} />}>
+                <Route path="admin" element={<AdminPage />} />
+              </Route>
+              {import.meta.env.DEV && (
+                <Route element={<RoleRoute roles={['admin']} />}>
+                  <Route path="seed" element={<SeedPage />} />
+                </Route>
+              )}
 
               <Route path="*" element={<NotFoundPage />} />
             </Route>

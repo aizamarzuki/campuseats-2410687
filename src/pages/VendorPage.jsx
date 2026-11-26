@@ -3,7 +3,7 @@ import { useVendor } from '../hooks/useVendor.js'
 import MenuList from '../components/MenuList.jsx'
 import { Loading, ErrorMessage } from '../components/Status.jsx'
 
-export default function VendorPage() {
+function VendorPage() {
   const { id } = useParams()
   const { vendor, menu, loading, error } = useVendor(id)
 
@@ -12,7 +12,11 @@ export default function VendorPage() {
   if (!vendor) return <p>Vendor not found. <Link to="/">Back to vendors</Link></p>
 
   // Attach vendorName so batch order splitting knows the vendor name
-  const items = menu.map((item) => ({ ...item, vendorName: vendor.name }))
+  const items = menu.map((item) => ({
+  ...item,
+  vendorName: vendor.name,
+  vendorOwnerUid: vendor.ownerUid ?? null,
+}))
 
   return (
     <section>
@@ -23,3 +27,4 @@ export default function VendorPage() {
     </section>
   )
 }
+export default VendorPage

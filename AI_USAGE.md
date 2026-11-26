@@ -29,6 +29,7 @@ Add a new section every week, before you tag. Did not use AI? Write "None" under
   - Kept updating cart items immutably (updating `qty` or filtering) instead of mutating state directly with `cart.push()`.
   - Kept deriving total prices on the fly using `.reduce()` instead of redundantly storing totals in state.
 - One thing the AI got wrong and how I fixed it: The AI spotted a single-letter casing bug where `if (Loading)` in `App.jsx` was checking the imported `<Loading />` component function reference (which always evaluates to truthy) instead of the `loading` boolean state variable (lowercase `l`). Changing `Loading` to `loading` allowed the `useEffect` completion state to render the main vendor view.
+
 ## Week 4
 - Tool(s): Gemini
 - What I Asked:
@@ -42,10 +43,9 @@ Add a new section every week, before you tag. Did not use AI? Write "None" under
 - One thing the AI got wrong and how I fixed it:
 The AI generated code importing components from `react-router-dom`, which is obsolete in React Router 8 where all routing hooks and elements are imported directly from `react-router`. I updated all imports to `from 'react-router'`.
 
-## Week 5: Firebase Setup, AuthContext & Protected Routes
-
-- Tools: Gemini
-- What I Asked"
+## Week 5:
+- Tool(s): Gemini
+- What I Asked:
   1. How to integrate Firebase Authentication (Email/Password & Google Sign-In) with Vite environment variables.
   2. How to construct `<AuthProvider>` and `useAuth` hook with an `onAuthStateChanged` observer.
   3. How to write `<ProtectedRoute>` to handle user loading states and redirect guests to `/login` with return parameters.
@@ -56,9 +56,8 @@ The AI generated code importing components from `react-router-dom`, which is obs
 - One Thing the AI Got Wrong:
   - The AI omitted the `loading` check inside `ProtectedRoute.jsx`, causing a quick red screen flash of `/login` on page refresh before Firebase restored authentication state. I fixed it by returning `<Loading />` while `loading` is true.
 
-## Week 6: Cloud Firestore CRUD & Real-Time Listeners
-
-- Tools: Gemini
+## Week 6
+- Tool(s): Gemini
 - What I asked:
   1. How to migrate vendor menus and orders from local storage and static JSON into Cloud Firestore collections and subcollections (`vendors/{vendorId}/menu`).
   2. How to write a batch-seeding utility (`seedDemoData`) and real-time `onSnapshot` listeners inside `src/services/vendors.js` and `src/services/orders.js` with proper `useEffect` cleanup functions.
@@ -70,3 +69,17 @@ The AI generated code importing components from `react-router-dom`, which is obs
   3. Added the missing `/seed` route inside `App.jsx` under `import.meta.env.DEV` so demo data could be uploaded to Firestore without exposing the route in production.
 - One thing the AI got wrong and how I fixed it:**
   When formatting `order.createdAt` on `OrdersPage.jsx`, the AI initially called `.toDate()` directly on `createdAt`. Because `serverTimestamp()` is temporarily `null` on the client right after `batch.commit()` before the server responds, it caused a null-reference crash; I fixed it with a ternary fallback (`order.createdAt ? order.createdAt.toDate().toLocaleString('en-MY') : 'just now'`).
+
+## Week 7
+- Tool(s): Gemini
+- What I asked for:
+  1. How to model user roles (`student`, `vendor`, `admin`) in `users/{uid}` and synchronize them live inside `AuthProvider.jsx` using `ensureUserProfile` and `subscribeToProfile`.
+  2. How to build the generic `useSubscription` hook, `<RoleRoute>` guard, `BecomeVendorPage.jsx`, `AdminPage.jsx`, and `DashboardPage.jsx` (`VendorOrders` + `MenuManager`).
+  3. How to complete the `firestore.rules` file (`TODO 4`, `TODO 5`, and `TODO 6`) using `diff(resource.data).affectedKeys().hasOnly(...)` so students, vendors, and admins are strictly authorized on the server.
+  4. How to implement my Digit 7 personal feature (**Order Notes Per Item**) on `VendorOrders.jsx` and lock order `items` against post-checkout edits in `firestore.rules`.
+- What I kept, changed or rejected, and why:
+  1. Kept the two-listener cleanup pattern in `AuthProvider.jsx` (`stopAuth()` and `stopProfile()`) so profile listeners do not leak across account switches.
+  2. Added explicit item note rendering inside `VendorOrders.jsx` so vendors see student customization notes immediately on incoming orders.
+  3. Kept the strict execution order (create admin profile first, re-seed with `approved: true`, assign `ownerUid`, then deploy `firestore.rules`) to avoid empty home-page queries or `permission-denied` blocks.
+- One thing the AI got wrong and how I fixed it:
+  When writing the student update rule in `firestore.rules`, checking `request.resource.data.keys().hasOnly(['pickupTime'])` fails because `request.resource.data` represents the entire document after the write rather than only the changed fields. I fixed it by using `request.resource.data.diff(resource.data).affectedKeys().hasOnly(['pickupTime'])` so Firestore compares only the modified keys.
